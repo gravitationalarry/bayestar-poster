@@ -1,15 +1,11 @@
 \documentclass[portrait]{a0poster}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{fontspec}
-% ApJ style citations
 \usepackage{natbib}
-%\usepackage{amsmath}
-%\usepackage{amssymb}
 \usepackage{graphicx}
-%\usepackage{microtype}
-% Color mixing
 \usepackage{xcolor}
-% Paragraph caps
 \usepackage{lettrine}
 \usepackage{flowfram}
 
@@ -123,6 +119,17 @@ $$
 	\gamma_i^* = \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
 $$
 The integral strongly resembles a convolution on the unit sphere.
+
+\section*{Multiple telescope case}
+
+For multiple telescopes, the figure of merit is the probability of imaging the source with at least one telescope:
+$$
+	p_{\geqslant 1} \equiv \sum_i p_i - \sum_{i \neq j} p_{ij} + \sum_{i \neq j \neq k} p_{ijk} - \cdots
+$$
+This is \textbf{not} the same as the probability of imaging the source with telescope 1, or telescope 2, or telescope 3 \dots :
+$$
+	p_{1 \textrm{ or } 2 \textrm{ or } 3 \textrm{ or } \dots} = p_1 \, p_2 \, p_3 \dots \neq p_{\geqslant 1}
+$$
 
 \bibliographystyle{apj}
 \bibliography{../proposal,../telescope,../telescope_list}
