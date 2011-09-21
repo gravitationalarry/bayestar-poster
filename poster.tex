@@ -12,7 +12,6 @@
 % Macros
 \newcommand{\EM}[1]{\ensuremath{\textsc{\textrm{em}}_#1}}
 \newcommand{\GW}{\ensuremath{\textsc{\textrm{gw}}}}
-\renewcommand{\familydefault}{\sfdefault}
 
 % Adjust section style
 \makeatletter
@@ -25,6 +24,10 @@
 {\fontspec{Marvel Bold}\Huge}} % the style
 \makeatother
 
+% Adjust default font
+\setsansfont[Mapping=tex-text]{Corbel}
+\renewcommand{\familydefault}{\sfdefault}
+
 % Expand space between lines
 \linespread{1.2}
 
@@ -36,8 +39,8 @@
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0\textheight}[efficiency_distance]
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0\textheight}[efficiency_histogram]
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0.85\textheight}[convergence]
+\newstaticframe{0.66\textwidth}{0.025\textheight}{0.34\textwidth}{0.75\textheight}[ligosmile]
 \newstaticframe{0.32\textwidth}{0.32\textwidth}{0\textwidth}{0\textheight}[healpix-dots]
-\newstaticframe{0.66\textwidth}{0.025\textheight}{0.34\textwidth}{0.7\textheight}[ligosmile]
 \newflowframe{0.32\textwidth}{0.025\textheight}{0.34\textwidth}{0.35\textheight}
 \newflowframe{0.32\textwidth}{0.2\textheight}{0.34\textwidth}{0.15\textheight}
 \newflowframe{0.32\textwidth}{0.2\textheight}{0.68\textwidth}{0.15\textheight}
@@ -45,7 +48,6 @@
 
 
 \begin{document}
-\fontspec{Corbel}
 
 \begin{staticcontents*}{title-drawing}
 \includegraphics[width=\textwidth,clip=true,trim=0cm 5cm 0cm 0cm]{title-drawing.pdf}
@@ -99,9 +101,9 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 
 A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it harder to decide on the “best” place to point a telescope.
 
-We realized that we could phrase the single telescope problem in terms of a cross-correlation of the telescope’s FOV and the GW sky map and attack it with HEALPix, the workhorse of CMB mapping, and harmonic analysis on the sphere.
+We realized that if we phrased the single telescope problem as a cross-correlation of the telescope’s FOV and the GW sky map, we could attack it with HEALPix --- the workhorse of CMB maps --- and spherical harmonic analysis.
 
-Our summer student (A. Speranza) implemented the fast convolution of~\citet{Wandelt:2001p13439} and used it to evaluate the probability of imaging an EM counterpart as a function of the source’s distance.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
+Our summer student (A. Speranza) implemented the fast convolution of~\citet{Wandelt:2001p13439} and used it to compute the probability of imaging an EM counterpart.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
 
 What surprised us was that coordinating all of the observations by maximizing the probability of imaging the source conditioned on all of the telescopes’ pointings \emph{doubled} the number of detectable sources as compared to deciding each telescope’s configuration in isolation.
 
