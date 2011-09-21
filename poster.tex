@@ -16,8 +16,21 @@
 % Macros
 \newcommand{\EM}[1]{\ensuremath{\textsc{\textrm{em}}_#1}}
 \newcommand{\GW}{\ensuremath{\textsc{\textrm{gw}}}}
-\newcommand{\heading}[1]{{\fontspec{Marvel}\Huge\noindent#1}\vspace{1em}}
 \renewcommand{\familydefault}{\sfdefault}
+
+% Adjust section style
+\makeatletter
+\renewcommand{\section}{\@startsection
+{section}%                   % the name
+{1}%                         % the level
+{0mm}%                       % the indent
+{-\baselineskip}%            % the before skip
+{0.5\baselineskip}%          % the after skip
+{\fontspec{Marvel Bold}\Huge}} % the style
+\makeatother
+
+%\let\oldsection\section
+%\renewcommand{\section}[1]{\oldsection{\fontspec{Marvel}\Huge#1}\vspace{1em}}
 
 % Expand space between lines
 \linespread{1.2}
@@ -41,11 +54,11 @@
 \end{staticcontents*}
 
 \begin{staticcontents*}{efficiency_distance}
-\includegraphics[width=\textwidth]{efficiency_distance}
+\includegraphics[width=\textwidth]{../efficiency_distance}
 \end{staticcontents*}
 
 \begin{staticcontents*}{efficiency_histogram}
-\includegraphics[width=\textwidth]{efficiency_histogram}
+\includegraphics[width=\textwidth]{../efficiency_histogram}
 \end{staticcontents*}
 
 \begin{staticcontents*}{convergence}
@@ -53,7 +66,7 @@
 \includegraphics[width=0.5\textwidth]{multipole}
 \end{staticcontents*}
 
-\heading{Background}
+\section*{Background}
 
 \framebreak
 
@@ -63,7 +76,7 @@ A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vi
 
 We realized that we could phrase the single telescope problem in terms of a convolution of the telescope’s FOV and the GW sky map and attack it with HEALPix, the workhorse of CMB mapping, and harmonic analysis on the sphere.
 
-Our summer student (A. Speranza) implemented the fast convolution of Wandelt \& Górski (2001) and used it to evaluate the probability of imaging an EM counterpart as a function of the source’s distance.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
+Our summer student (A. Speranza) implemented the fast convolution of~\citet{Wandelt:2001p13439} and used it to evaluate the probability of imaging an EM counterpart as a function of the source’s distance.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
 
 What surprised us was that coordinating all of the observations by maximizing the probability of imaging the source conditioned on all of the telescopes’ pointings \emph{doubled} the number of detectable sources as compared to deciding each telescope’s configuration in isolation.
 
@@ -84,7 +97,7 @@ Uses simulated annealing to the probability of imaging the source by varying the
 
 \framebreak
 
-\heading{Single telescope case}
+\section*{Single telescope case}
 
 \lettrine{\fontspec{Copse}F}{\textnormal{or}} GW detectors, the observables are strain time series.  The GW sky map, is the posterior distribution
 $$
@@ -103,5 +116,8 @@ $$
 	\gamma_i^* = \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
 $$
 The integral strongly resembles a convolution on the unit sphere.
+
+\bibliographystyle{apj}
+\bibliography{../proposal,../telescope,../telescope_list}
 
 \end{document}
