@@ -37,6 +37,7 @@
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0\textheight}[efficiency_histogram]
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0.85\textheight}[convergence]
 \newstaticframe{0.32\textwidth}{0.32\textwidth}{0\textwidth}{0\textheight}[healpix-dots]
+\newstaticframe{0.66\textwidth}{0.025\textheight}{0.34\textwidth}{0.7\textheight}[ligosmile]
 \newflowframe{0.32\textwidth}{0.025\textheight}{0.34\textwidth}{0.35\textheight}
 \newflowframe{0.32\textwidth}{0.2\textheight}{0.34\textwidth}{0.15\textheight}
 \newflowframe{0.32\textwidth}{0.2\textheight}{0.68\textwidth}{0.15\textheight}
@@ -69,6 +70,27 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 \includegraphics[width=\textwidth]{healpix-dots}
 \end{staticcontents*}
 
+\begin{staticcontents*}{ligosmile}
+\begin{tabular}{ccccc}
+\begin{minipage}[c]{0.3\textwidth}
+\includegraphics[width=\textwidth]{smile}
+\end{minipage} &
+{\Huge$\star$} &
+\begin{minipage}[c]{0.3\textwidth}
+\includegraphics[width=\textwidth]{ligo}
+\end{minipage} &
+{\Huge$=$} &
+\begin{minipage}[c]{0.3\textwidth}
+\includegraphics[width=\textwidth]{ligosmile}
+\end{minipage} \\
+{\fontspec{Marvel Bold}\huge Field of view} &
+&
+{\fontspec{Marvel Bold}\huge GW sky map} &
+&
+{\fontspec{Marvel Bold}\huge Cross-correlation}
+\end{tabular}
+\end{staticcontents*}
+
 \section*{Background}
 
 \framebreak
@@ -77,7 +99,7 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 
 A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it harder to decide on the “best” place to point a telescope.
 
-We realized that we could phrase the single telescope problem in terms of a convolution of the telescope’s FOV and the GW sky map and attack it with HEALPix, the workhorse of CMB mapping, and harmonic analysis on the sphere.
+We realized that we could phrase the single telescope problem in terms of a cross-correlation of the telescope’s FOV and the GW sky map and attack it with HEALPix, the workhorse of CMB mapping, and harmonic analysis on the sphere.
 
 Our summer student (A. Speranza) implemented the fast convolution of~\citet{Wandelt:2001p13439} and used it to evaluate the probability of imaging an EM counterpart as a function of the source’s distance.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
 
