@@ -38,7 +38,7 @@
 \newstaticframe{\textwidth}{0.3\textheight}{0\textwidth}{0.5\textheight}[title-drawing]
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0\textheight}[efficiency_distance]
 \newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0\textheight}[efficiency_histogram]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0.85\textheight}[convergence]
+\newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0.55\textheight}[convergence]
 \newstaticframe{0.66\textwidth}{0.025\textheight}{0.34\textwidth}{0.75\textheight}[ligosmile]
 \newstaticframe{0.32\textwidth}{0.32\textwidth}{0\textwidth}{0\textheight}[healpix-dots]
 \newflowframe{0.32\textwidth}{0.025\textheight}{0.34\textwidth}{0.35\textheight}
@@ -97,7 +97,7 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 
 \framebreak
 
-\lettrine{\fontspec{Copse}P}{\textnormal{lanning}} telescope pointings for followup of gravitational wave (GW) events is a challenging optimization problem.  Probability maps conditioned on GW observations (GW sky maps) are multimodal and dispersed over 4π.
+\lettrine{\fontspec{Copse}P}{lanning} telescope pointings for followup of gravitational wave (GW) events is a challenging optimization problem.  Probability maps conditioned on GW observations (GW sky maps) are multimodal and dispersed over 4π.
 
 A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it harder to decide on the “best” place to point a telescope.
 
@@ -126,27 +126,48 @@ Uses simulated annealing to the probability of imaging the source by varying the
 
 \section*{Single telescope case}
 
-\lettrine{\fontspec{Copse}F}{\textnormal{or}} GW detectors, the observables are strain time series.  The GW sky map, is the posterior distribution
+\lettrine{\fontspec{Copse}S}{ky maps} are posterior distributions of source location $\omega$ given all GW observations \GW.  The GW sky map is
+%
 $$
-	p(\omega | \GW) = s(\omega)
+	s(\omega) \triangleq p(\omega | \GW).
 $$
-where $\omega$ is the source location and $\GW$ denotes all GW observations.  Let $\EM{i}$ denote the event of observing an optical transient with telescope $i$.  Let $C_i$ represent the configuration of telescope $i$, which consists of a pointing orientation $\gamma_i$.  The probability of observing an EM counterpart in telescope $i$ given its pointing $\gamma_i$ is
+%
+Let $\EM{i}$ denote the event of observing an optical transient with telescope $i$.  Let $\gamma_i$ represent the pointing of telescope $i$.  The probability of observing an EM counterpart in telescope $i$ given its pointing $\gamma_i$ is
+%
 $$
-	p(\EM{i} | \gamma_i, \omega) = b_i(\gamma_i^{-1} \omega).
+	b_i(\gamma_i^{-1} \omega) \triangleq p(\EM{i} | \gamma_i, \omega).
 $$
+%
 Now, marginalizing over the unknown source location, this becomes
-$$
-	p_i \equiv p (\EM{i} | \gamma_i, \GW) = \int s(\omega) b_i(\gamma_i^{-1} \omega) \, \mathrm{d}\Omega.
-$$
+%
+\begin{equation}
+	\label{eq:single-telescope-integral}
+	p_i \triangleq p (\EM{i} | \gamma_i, \GW) = \int s(\omega) b_i(\gamma_i^{-1} \omega) \, \mathrm{d}\Omega.
+\end{equation}
+%
 The optimal pointing of a single telescope (ignoring sun and horizon interference) is
+%
 $$
-	\gamma_i^* = \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
+	\gamma_i^* \triangleq \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
 $$
-The integral strongly resembles a convolution on the unit sphere.
+
+\section*{Numerical implementation}
+
+Equation~(\ref{eq:single-telescope-integral}) is strongly reminiscent of a cross-correlation integral with the kernel $b_i (\gamma_i^{-1} \omega)$.  For functions defined on the real number line, the convolution theorem and the fast Fourier transform (FFT) provide a fast convolution algorithm.  \citet{Wandelt:2001p13439}~and many others have provided analogous fast convolution algorithms on $S^2$.
+
+We used HEALPix to write two convolution algorithms:
+
+\paragraph{spatial} uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
+
+\paragraph{multipole} uses the fast convolution algorithm of~\citet{Wandelt:2001p13439}.  It entails a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and finally a 2D inverse FFT to return to polar coordinates.\\
+
+We tested the rate of convergence and run time of both algorithms.  (For the multipole algorithm, we tested for self-convergence.)  For a resolution of $\approx$~0.05~deg$^\mathsf{2}$, the spatial algorithm took about 1000~s while the multipole algorithm took only about 4~s.
+
+Both algorithms are parallelized with OpenMP, so both will be even faster on multicore machines (e.g. cluster head nodes).
 
 \section*{Multiple telescope case}
 
-For multiple telescopes, the figure of merit is the probability of imaging the source with at least one telescope:
+\lettrine{\fontspec{Copse}F}{or multiple telescopes}, the figure of merit is the probability of imaging the source with at least one telescope:
 $$
 	p_{\geqslant 1} \equiv \sum_i p_i - \sum_{i \neq j} p_{ij} + \sum_{i \neq j \neq k} p_{ijk} - \cdots
 $$
