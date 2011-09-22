@@ -1,5 +1,6 @@
 \documentclass[portrait]{a0poster}
 
+\usepackage{aas_macros}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{fontspec}
@@ -22,6 +23,11 @@
 {-\baselineskip}%            % the before skip
 {0.5\baselineskip}%          % the after skip
 {\fontspec{Marvel Bold}\Huge}} % the style
+\makeatother
+
+% Adjust journal abbreviation style for AAS journal macros
+\makeatletter
+\let\jnl@style=\sf
 \makeatother
 
 % Adjust default font
