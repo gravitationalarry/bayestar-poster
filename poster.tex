@@ -47,18 +47,17 @@
 \setlength{\parindent}{4em}
 
 % Flow frames
-\newstaticframe{\textwidth}{\textheight}{0.4\textwidth}{0.4\textheight}[watermark]
-\newstaticframe{\textwidth}{0.3\textheight}{0\textwidth}{0.5\textheight}[title-drawing]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0\textheight}[efficiency_distance]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0\textheight}[efficiency_histogram]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0.55\textheight}[convergence]
-\newstaticframe{0.66\textwidth}{0.025\textheight}{0.34\textwidth}{0.75\textheight}[ligosmile]
-\newstaticframe{0.32\textwidth}{0.32\textwidth}{0\textwidth}{0\textheight}[healpix-dots]
-\newflowframe{0.32\textwidth}{0.025\textheight}{0.34\textwidth}{0.35\textheight}
-\newflowframe{0.32\textwidth}{0.2\textheight}{0.34\textwidth}{0.15\textheight}
-\newflowframe{0.32\textwidth}{0.2\textheight}{0.68\textwidth}{0.15\textheight}
-\newflowframe{0.32\textwidth}{\textheight}{0\textwidth}{0\textheight}
-\newstaticframe{0.32\textwidth}{0.5\textheight}{0.34\textwidth}{0.5\textheight}[flowchart]
+\newstaticframe{\textwidth}{\textheight}{0.4\textwidth}{-0.2\textheight}[watermark]
+\newstaticframe{\textwidth}{0.3\textheight}{0.35\textwidth}{0.85\textheight}[title-drawing]
+\newstaticframe{0.32\textwidth}{0.15\textheight}{0\textwidth}{0.475\textheight}[efficiency_distance]
+\newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0.475\textheight}[efficiency_histogram]
+\newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0.68\textheight}[convergence]
+\newstaticframe{0.32\textwidth}{0.32\textwidth}{0.66\textwidth}{0\textheight}[healpix-dots]
+\newstaticframe{0.32\textwidth}{0.5\textheight}{0.68\textwidth}{0.1\textheight}[flowchart]
+\newflowframe{0.32\textwidth}{0.25\textheight}{0\textwidth}{0.61\textheight}
+\newflowframe{0.32\textwidth}{0.45\textheight}{0\textwidth}{0\textheight}
+\newflowframe{0.32\textwidth}{0.25\textheight}{0.34\textwidth}{0.61\textheight}
+\newflowframe{0.32\textwidth}{0.45\textheight}{0.34\textwidth}{0\textheight}
 
 
 \begin{document}
@@ -68,7 +67,7 @@
 \end{staticcontents*}
 
 \begin{staticcontents*}{title-drawing}
-\includegraphics[width=\textwidth,clip=true,trim=0cm 5cm 0cm 0cm]{title-drawing.pdf}
+\includegraphics[width=0.5\textwidth]{title-drawing.pdf}
 \end{staticcontents*}
 
 \begin{staticcontents*}{efficiency_distance}
@@ -88,27 +87,6 @@
 \large\centering
 figure 6d of~\citet{healpix}\\\vspace{5mm}
 \includegraphics[width=\textwidth]{healpix-dots}
-\end{staticcontents*}
-
-\begin{staticcontents*}{ligosmile}
-\begin{tabular}{ccccc}
-\begin{minipage}[c]{0.3\textwidth}
-\includegraphics[width=\textwidth]{smile}
-\end{minipage} &
-{\Huge$\star$} &
-\begin{minipage}[c]{0.3\textwidth}
-\includegraphics[width=\textwidth]{ligo}
-\end{minipage} &
-{\Huge$=$} &
-\begin{minipage}[c]{0.3\textwidth}
-\includegraphics[width=\textwidth]{ligosmile}
-\end{minipage} \\
-{\fontspec{Marvel Bold}\huge Field of view} &
-&
-{\fontspec{Marvel Bold}\huge GW sky map} &
-&
-{\fontspec{Marvel Bold}\huge Cross-correlation}
-\end{tabular}
 \end{staticcontents*}
 
 \begin{staticcontents*}{flowchart}
@@ -150,8 +128,6 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 
 \section*{Background}
 
-\framebreak
-
 \dropcap{P}{lanning} telescope pointings for followup of gravitational wave (GW) events is a challenging optimization problem.  Probability maps conditioned on GW observations (GW sky maps) are multimodal and dispersed over 4π.
 
 A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it harder to decide on the “best” place to point a telescope.
@@ -164,7 +140,7 @@ What surprised us was that coordinating all of the observations by maximizing th
 
 \framebreak
 
-Our key results are the two figures below.  At left is the fraction of injected signals that we would have imaged with one pointing of each telescope at the time of the trigger as a function of luminosity distance.  Solid lines represent observing plans that account for interference from the Sun and Earth.  Dashed lines represent observing plans in which these considerations are neglected.
+Our key results are the two figures above.  At left is the fraction of injected signals that we would have imaged with one pointing of each telescope at the time of the trigger as a function of luminosity distance.  Solid lines represent observing plans that account for interference from the Sun and Earth.  Dashed lines represent observing plans in which these considerations are neglected.
 
 We tested three different planning algorithms:
 
@@ -177,9 +153,26 @@ Suppose that we have chosen pointings for telescopes 1, 2, $\dots$, $i$.  The po
 \paragraph{\color{blue}anneal}
 Uses simulated annealing to the probability of imaging the source by varying the configurations of all of the telescopes simultaneously.
 
-\framebreak
-
 \section*{Single telescope case}
+
+\begin{tabular}{ccccc}
+	\begin{minipage}[c]{0.096\textwidth}
+		\includegraphics[width=\textwidth]{smile}
+	\end{minipage} &
+	{\Large$\star$} &
+	\begin{minipage}[c]{0.096\textwidth}
+		\includegraphics[width=\textwidth]{ligo}
+	\end{minipage} &
+	{\Large$=$} &
+	\begin{minipage}[c]{0.096\textwidth}
+		\includegraphics[width=\textwidth]{ligosmile}
+	\end{minipage} \\
+	{\fontspec{Marvel Bold}\large Field of view} &
+	&
+	{\fontspec{Marvel Bold}\large GW sky map} &
+	&
+	{\fontspec{Marvel Bold}\large Cross-correlation}
+\end{tabular}
 
 \dropcap{S}{ky maps} are posterior distributions of source location $\omega$ given all GW observations \GW.  The GW sky map is
 %
@@ -206,19 +199,19 @@ $$
 	\gamma_i^* \triangleq \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
 $$
 
+\framebreak
+
 \section*{Numerical implementation}
 
-\dropcap{E}{quation}~(\ref{eq:single-telescope-integral}) is strongly reminiscent of a cross-correlation integral with the kernel $b_i (\gamma_i^{-1} \omega)$.  For functions defined on the real number line, the convolution theorem and the fast Fourier transform (FFT) provide a fast convolution algorithm.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and many others have provided analogous fast convolution algorithms on $S^2$.
+\dropcap{E}{quation}~(\ref{eq:single-telescope-integral}) resembles a cross-correlation integral.  For scalar functions, the convolution theorem and the fast Fourier transform (FFT) make cross-correlation in the frequency domain very efficient.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and others have described analogous fast convolution algorithms for functions defined on the unit sphere.
 
 We used HEALPix to write two convolution algorithms:
 
 \paragraph{spatial} uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
 
-\paragraph{multipole} uses the fast convolution algorithm of~\citet{Wandelt:2001p13439}.  It entails a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and finally a 2D inverse FFT to return to polar coordinates.\\
+\paragraph{multipole} involves a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
 
-We tested the rate of convergence and run time of both algorithms.  (For the multipole algorithm, we tested for self-convergence.)  For a resolution of $\approx$~0.05~deg$^\mathsf{2}$, the spatial algorithm took about 1000~s while the multipole algorithm took only about 4~s.
-
-Both algorithms are parallelized with OpenMP, so both will be even faster on multicore machines (e.g. cluster head nodes).
+We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes 4~s.  Both versions are OpenMP accelelerated for further speedup on multicore machines.
 
 \section*{Multiple telescope case}
 
