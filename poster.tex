@@ -1,5 +1,6 @@
-\documentclass[portrait]{a0poster}
+\documentclass[landscape]{a0poster}
 
+% Packages
 \usepackage{aas_macros}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -9,13 +10,14 @@
 \usepackage{xcolor}
 \usepackage{lettrine}
 \usepackage{flowfram}
+\usepackage{url}
 \usepackage{tikz}
 \usetikzlibrary{calc,matrix,shapes.geometric,shapes.misc,shapes.symbols}
 
 % Macros
 \newcommand{\EM}[1]{\ensuremath{\textsc{\textrm{em}}_#1}}
 \newcommand{\GW}{\ensuremath{\textsc{\textrm{gw}}}}
-\newcommand{\dropcap}[2]{\lettrine{\fontspec{Copse}#1}{\textnormal{#2}}}
+\newcommand{\dropcap}[2]{\lettrine{\fontspec{Copse}#1}{\textnormal{ #2}}}
 
 % Adjust section style
 \makeatletter
@@ -46,25 +48,25 @@
 % Increase paragraph indentation
 \setlength{\parindent}{4em}
 
+% Static frames
+\newstaticframe{\textwidth}{0.3\textheight}{-0.125\textwidth}{0.81\textheight}[title-drawing]
+\newstaticframe{28cm}{21cm}{4cm}{26cm}[efficiency_distance]
+\newstaticframe{28cm}{21cm}{32cm}{26cm}[efficiency_histogram]
+\newstaticframe{27cm}{20cm}{32cm}{0cm}[convergence]
+\newstaticframe{16cm}{18cm}{48cm}{66cm}[healpix-dots]
+\newstaticframe{27cm}{80cm}{88cm}{20cm}[flowchart]
+\newstaticframe{40cm}{5cm}{32cm}{20cm}[ligosmile]
+
 % Flow frames
-\newstaticframe{\textwidth}{\textheight}{0.4\textwidth}{-0.2\textheight}[watermark]
-\newstaticframe{\textwidth}{0.3\textheight}{0.35\textwidth}{0.85\textheight}[title-drawing]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0\textwidth}{0.475\textheight}[efficiency_distance]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.34\textwidth}{0.475\textheight}[efficiency_histogram]
-\newstaticframe{0.32\textwidth}{0.15\textheight}{0.68\textwidth}{0.68\textheight}[convergence]
-\newstaticframe{0.32\textwidth}{0.32\textwidth}{0.66\textwidth}{0\textheight}[healpix-dots]
-\newstaticframe{0.32\textwidth}{0.5\textheight}{0.68\textwidth}{0.1\textheight}[flowchart]
-\newflowframe{0.32\textwidth}{0.25\textheight}{0\textwidth}{0.61\textheight}
-\newflowframe{0.32\textwidth}{0.45\textheight}{0\textwidth}{0\textheight}
-\newflowframe{0.32\textwidth}{0.25\textheight}{0.34\textwidth}{0.61\textheight}
-\newflowframe{0.32\textwidth}{0.45\textheight}{0.34\textwidth}{0\textheight}
+\newflowframe{27cm}{27cm}{4cm}{40cm}
+\newflowframe{27cm}{27cm}{32cm}{40cm}
+\newflowframe{27cm}{27cm}{4cm}{-1cm}
+\newflowframe{27cm}{50cm}{60cm}{30cm}
+\newstaticframe{27cm}{30cm}{60cm}{3cm}[spilled-text]
+\newflowframe{27cm}{35cm}{88cm}{0cm}
 
 
 \begin{document}
-
-\begin{staticcontents*}{watermark}
-\includegraphics[scale=2]{example-no-interference}
-\end{staticcontents*}
 
 \begin{staticcontents*}{title-drawing}
 \includegraphics[width=0.5\textwidth]{title-drawing.pdf}
@@ -84,9 +86,30 @@
 \end{staticcontents*}
 
 \begin{staticcontents*}{healpix-dots}
-\large\centering
+\centering
 figure 6d of~\citet{healpix}\\\vspace{5mm}
 \includegraphics[width=\textwidth]{healpix-dots}
+\end{staticcontents*}
+
+\begin{staticcontents*}{ligosmile}
+\begin{tabular}{ccccc}
+	\begin{minipage}[c]{8cm}
+		\includegraphics[width=\textwidth]{smile}
+	\end{minipage} &
+	{\Large$\star$} &
+	\begin{minipage}[c]{8cm}
+		\includegraphics[width=\textwidth]{ligo}
+	\end{minipage} &
+	{\Large$=$} &
+	\begin{minipage}[c]{8cm}
+		\includegraphics[width=\textwidth]{ligosmile}
+	\end{minipage} \\
+	{\fontspec{Marvel Bold}\large Field of view} &
+	&
+	{\fontspec{Marvel Bold}\large GW sky map} &
+	&
+	{\fontspec{Marvel Bold}\large Cross-correlation}
+\end{tabular}
 \end{staticcontents*}
 
 \begin{staticcontents*}{flowchart}
@@ -126,11 +149,7 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 \end{tikzpicture}
 \end{staticcontents*}
 
-\section*{Background}
-
-\dropcap{P}{lanning} telescope pointings for followup of gravitational wave (GW) events is a challenging optimization problem.  Probability maps conditioned on GW observations (GW sky maps) are multimodal and dispersed over 4π.
-
-A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it harder to decide on the “best” place to point a telescope.
+\dropcap{P}{lanning} optical followup of gravitational wave (GW) events is a challenging optimization problem.  GW sky maps are multimodal and dispersed over 4π.  A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it difficult to decide on the “best” place to point a telescope.
 
 We realized that if we phrased the single telescope problem as a cross-correlation of the telescope’s FOV and the GW sky map, we could attack it with HEALPix --- the workhorse of CMB maps --- and spherical harmonic analysis.
 
@@ -140,7 +159,8 @@ What surprised us was that coordinating all of the observations by maximizing th
 
 \framebreak
 
-Our key results are the two figures above.  At left is the fraction of injected signals that we would have imaged with one pointing of each telescope at the time of the trigger as a function of luminosity distance.  Solid lines represent observing plans that account for interference from the Sun and Earth.  Dashed lines represent observing plans in which these considerations are neglected.
+\parshape 2 0cm 19cm 0cm 27cm
+Our key results are the two figures below.  At left is the fraction of injected signals that we would have imaged with one pointing of each telescope at the time of the trigger as a function of luminosity distance.  Solid lines represent observing plans that account for interference from the Sun and Earth.  Dashed lines represent observing plans in which these considerations are neglected.
 
 We tested three different planning algorithms:
 
@@ -155,80 +175,95 @@ Uses simulated annealing to the probability of imaging the source by varying the
 
 \section*{Single telescope case}
 
-\begin{tabular}{ccccc}
-	\begin{minipage}[c]{0.096\textwidth}
-		\includegraphics[width=\textwidth]{smile}
-	\end{minipage} &
-	{\Large$\star$} &
-	\begin{minipage}[c]{0.096\textwidth}
-		\includegraphics[width=\textwidth]{ligo}
-	\end{minipage} &
-	{\Large$=$} &
-	\begin{minipage}[c]{0.096\textwidth}
-		\includegraphics[width=\textwidth]{ligosmile}
-	\end{minipage} \\
-	{\fontspec{Marvel Bold}\large Field of view} &
-	&
-	{\fontspec{Marvel Bold}\large GW sky map} &
-	&
-	{\fontspec{Marvel Bold}\large Cross-correlation}
-\end{tabular}
-
-\dropcap{S}{ky maps} are posterior distributions of source location $\omega$ given all GW observations \GW.  The GW sky map is
+\dropcap{T}{he} posterior distribution of source location $\omega$ given all GW observations \GW\ is commonly called the GW sky map, defined
 %
 $$
-	s(\omega) \triangleq p(\omega | \GW).
+	s(\omega) \equiv p(\omega | \GW).
 $$
 %
 Let $\EM{i}$ denote the event of observing an optical transient with telescope $i$.  Let $\gamma_i$ represent the pointing of telescope $i$.  The probability of observing an EM counterpart in telescope $i$ given its pointing $\gamma_i$ is
 %
 $$
-	b_i(\gamma_i^{-1} \omega) \triangleq p(\EM{i} | \gamma_i, \omega).
+	b_i(\gamma_i^{-1} \omega) \equiv p(\EM{i} | \gamma_i, \omega).
 $$
 %
 Now, marginalizing over the unknown source location, this becomes
 %
 \begin{equation}
 	\label{eq:single-telescope-integral}
-	p_i \triangleq p (\EM{i} | \gamma_i, \GW) = \int s(\omega) b_i(\gamma_i^{-1} \omega) \, \mathrm{d}\Omega.
+	p_i \equiv p (\EM{i} | \gamma_i, \GW) = \int s(\omega) b_i(\gamma_i^{-1} \omega) \, \mathrm{d}\Omega.
 \end{equation}
 %
-The optimal pointing of a single telescope (ignoring sun and horizon interference) is
+The optimal pointing (ignoring sun and horizon interference) is
 %
 $$
-	\gamma_i^* \triangleq \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
+	\gamma_i^* \equiv \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
 $$
 
 \framebreak
 
-\section*{Numerical implementation}
+\section*{\hspace{3cm}Numerical implementation}
 
-\dropcap{E}{quation}~(\ref{eq:single-telescope-integral}) resembles a cross-correlation integral.  For scalar functions, the convolution theorem and the fast Fourier transform (FFT) make cross-correlation in the frequency domain very efficient.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and others have described analogous fast convolution algorithms for functions defined on the unit sphere.
+\parshape 8
+	4.25cm 22.75cm
+	4.5cm 22.5cm
+	4.75cm 22.25cm
+	4.5cm 22.5cm
+	4.25cm 22.75cm
+	4cm 23cm
+	3.25cm 23.75cm
+	0cm 27cm  
+Equation~(\ref{eq:single-telescope-integral}) resembles a cross-correlation integral.  For scalar functions, the convolution theorem and the fast Fourier transform (FFT) make cross-correlation in the frequency domain very efficient.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and others have described analogous fast convolution algorithms for functions defined on the unit sphere.  We used HEALPix to write two convolution algorithms:
 
-We used HEALPix to write two convolution algorithms:
+\paragraph{spatial}
+uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
 
-\paragraph{spatial} uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
+\paragraph{multipole}
+involves a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
 
-\paragraph{multipole} involves a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
+\noindent
+We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are OpenMP accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved runtimes as short as 5~s, although further speedup is probably possible.
 
-We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes 4~s.  Both versions are OpenMP accelelerated for further speedup on multicore machines.
+\vspace{1cm}
+\makebox[25cm][r]{\raggedleft\includegraphics[width=27cm]{example-no-interference}}
 
+%\framebreak
+\begin{staticcontents*}{spilled-text}
 \section*{Multiple telescope case}
 
 \dropcap{F}{or} multiple telescopes, the figure of merit is the probability of imaging the source with at least one telescope:
-$$
-	p_{\geqslant 1} \equiv \sum_i p_i - \sum_{i \neq j} p_{ij} + \sum_{i \neq j \neq k} p_{ijk} - \cdots
-$$
-This is \emph{not} the same as the probability of imaging the source with telescope 1, or telescope 2, or telescope 3 \dots :
-$$
-	p_{1 \textrm{ or } 2 \textrm{ or } 3 \textrm{ or } \dots} = p_1 \, p_2 \, p_3 \dots \neq p_{\geqslant 1}
-$$
+%
+\begin{align}
+	\label{eq:p_any}
+	p_{\geqslant 1} \equiv p(\EM{1} \cup \EM{2} \cup \dots \cup \EM{N} | \gamma_1, \gamma_2, \dots, \gamma_N, \GW) \nonumber \\
+	= 1 - \int
+		\left[ 1 - b_1 \left( \gamma_1^{-1} \omega \right) \right]
+		\left[ 1 - b_2 \left( \gamma_2^{-1} \omega \right) \right] \nonumber \\ \cdots
+		\left[ 1 - b_N \left( \gamma_N^{-1} \omega \right) \right]
+		s(\omega) \, \mathrm{d}\Omega.
+\end{align}
+%
+The integral expression above can be evaluated iteratively one telescope at a time, suggesting a greedy algorithm depicted in the flow chart at right.
+
+The most sophisticated planning algorithm that we tried used simulated annealing to simultaneously vary the pointings of all of the telescopes.  We used the Python module \texttt{scipy.optimize.anneal} and a modified version of the ``very fast'' cooling schedule described by \citet{Ingber1989967}.
+
+\section*{Case study}
+
+We compared the detection efficiency of the noncoordinated planner and our two coordinated planners using a set of 2126 GW skymaps from low-mass inspiral signals injected into 24 hours of simulated initial LIGO noise.  Surprisingly, we found that (a) the greedy planner performed almost as well as the anneal planner in terms of detection efficiency, and (b) both coordinated planners had roughly \emph{double} the detection efficiency as the noncoordinated planner.
+\end{staticcontents*}
+
+\framebreak
+
+\section*{Conclusion}
+
+\dropcap{W}{e} have demonstrated that coordinating observations amongst multiple telescopes is a promising strategy for EM followup of GW events.  We have developed an observation planning code that is \emph{fast} enough to be used for extensive simulation campaigns and \emph{flexible} enough to accommodate any network of telescopes.  Our code aims to be \emph{scalable} enough to produce observing plans in near real-time on a multi-core machine.
+
+This project lays the groundwork for future multi-messenger studies that will account for a mix of telescopes with different limiting magnitudes, slew times, in addition to fields of view.
 
 \bibliographystyle{apj}
 \bibliography{../proposal,../telescope,../telescope_list}
 
-\section*{Acknowledgements}
-
-LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation and operates under cooperative agreement PHY-0107417.  This research is supported by the National Science Foundation through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v1.
+\noindent\\
+LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v1.
 
 \end{document}
