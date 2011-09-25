@@ -63,7 +63,7 @@
 \newflowframe{27cm}{27cm}{4cm}{-1cm}
 \newflowframe{27cm}{50cm}{60cm}{30cm}
 \newstaticframe{27cm}{30cm}{60cm}{3cm}[spilled-text]
-\newflowframe{27cm}{35cm}{88cm}{0cm}
+\newflowframe{27cm}{35.5cm}{88cm}{0cm}
 
 
 \begin{document}
@@ -175,26 +175,24 @@ Uses simulated annealing to the probability of imaging the source by varying the
 
 \section*{Single telescope case}
 
-\dropcap{T}{he} posterior distribution of source location $\omega$ given all GW observations \GW\ is commonly called the GW sky map, defined as
-%
-$$
-	s(\omega) \equiv p(\omega | \GW).
-$$
-%
+\dropcap{T}{he} posterior distribution of source location $\omega$ given all GW observations \GW\ is commonly called the GW sky map, denoted $p(\omega | \GW)$.
+
 Let $\EM{i}$ denote the event of observing an optical transient with telescope $i$.  Let $\gamma_i$ represent the pointing of telescope $i$.  The probability of observing an EM counterpart in telescope $i$ given its pointing $\gamma_i$ is
 %
 $$
-	b_i(\gamma_i^{-1} \omega) \equiv p(\EM{i} | \gamma_i, \omega).
+	p(\EM{i} | \gamma_i, \omega) \equiv b_i(\gamma_i^{-1} \omega) \, v_i(\omega).
 $$
+%
+Here, the function $b_i(\gamma_i^{-1} \omega)$ describes the telescope's (rotated) FOV and $v_i$ describes environmental features such as the twilight/nighttime terminator, the horizon, and optionally the seeing.
 %
 Now, marginalizing over the unknown source location, this becomes
 %
 \begin{equation}
 	\label{eq:single-telescope-integral}
-	p_i \equiv p (\EM{i} | \gamma_i, \GW) = \int s(\omega) b_i(\gamma_i^{-1} \omega) \, \mathrm{d}\Omega.
+	p(\EM{i} | \gamma_i, \GW) \equiv \int b_i(\gamma_i^{-1} \omega) \, v(\omega) \, s(\omega) \, \mathrm{d}\Omega.
 \end{equation}
 %
-The optimal pointing (ignoring sun and horizon interference) is
+The optimal pointing is
 %
 $$
 	\gamma_i^* \equiv \arg \max_{\gamma_i} p(\EM{i} | \gamma_i, \GW).
@@ -219,10 +217,9 @@ Equation~(\ref{eq:single-telescope-integral}) resembles a cross-correlation inte
 uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
 
 \paragraph{multipole}
-involves a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
+involves a spherical harmonic transform of both the masked sky map $v_i(\omega)s(\omega)$ and the FOV $b_i(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
 
-\noindent
-We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are \emph{OpenMP} accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved runtimes as short as 5~s, although further speedup is probably possible.
+We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are \emph{OpenMP} accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved run times as short as 5~s, though further speedup is possible.
 
 \vspace{1cm}
 \makebox[25cm][r]{\raggedleft\includegraphics[width=27cm]{example-no-interference}}
@@ -237,9 +234,9 @@ We checked convergence and run time of both algorithms.  At a resolution of $\ap
 	\label{eq:p_any}
 	p_{\geqslant 1} \equiv p(\EM{1} \cup \EM{2} \cup \dots \cup \EM{N} | \gamma_1, \gamma_2, \dots, \gamma_N, \GW) \nonumber \\
 	= 1 - \int
-		\left[ 1 - b_1 \left( \gamma_1^{-1} \omega \right) \right]
-		\left[ 1 - b_2 \left( \gamma_2^{-1} \omega \right) \right] \nonumber \\ \cdots
-		\left[ 1 - b_N \left( \gamma_N^{-1} \omega \right) \right]
+		\left[ 1 - b_1 \left( \gamma_1^{-1} \omega \right) v_1(\omega) \right]
+		\left[ 1 - b_2 \left( \gamma_2^{-1} \omega \right) v_2(\omega) \right] \nonumber \\ \cdots
+		\left[ 1 - b_N \left( \gamma_N^{-1} \omega \right) v_N(\omega) \right]
 		s(\omega) \, \mathrm{d}\Omega.
 \end{align}
 %
@@ -249,7 +246,11 @@ The most sophisticated planning algorithm that we tried used simulated annealing
 
 \section*{Case study}
 
-We compared the detection efficiency of the noncoordinated planner and our two coordinated planners using a set of 2126 GW skymaps from low-mass inspiral signals injected into 24 hours of simulated initial LIGO noise.  Surprisingly, we found that (a) the greedy planner performed almost as well as the anneal planner in terms of detection efficiency, and (b) both coordinated planners had roughly \emph{double} the detection efficiency as the noncoordinated planner.
+We compared the detection efficiency of the noncoordinated planner and our two coordinated planners using a set of 2126 GW skymaps from low-mass inspiral signals injected into 24 hours of simulated initial LIGO noise.
+
+\hspace{2em}We computed the environmental masks $v_i(\omega)$ using the Python edition of \emph{NOVAS}, the US Naval Observatory's positional astronomy library.
+
+\hspace{2em}Surprisingly, we found that (a) \textit{greedy} performed almost as well as \emph{anneal} in terms of detection efficiency, and (b) both coordinated planners had roughly \emph{double} the detection efficiency of the \emph{noncoordinated} planner.
 \end{staticcontents*}
 
 \framebreak
@@ -262,6 +263,8 @@ This project lays the groundwork for future multi-messenger studies that will ac
 
 \bibliographystyle{apj}
 \bibliography{../proposal,../telescope,../telescope_list}
+\noindent
+http://aa.usno.navy.mil/software/novas
 
 \noindent\\
 LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v1.
