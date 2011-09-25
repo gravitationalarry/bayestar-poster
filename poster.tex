@@ -57,6 +57,10 @@
 \newstaticframe{27cm}{80cm}{88cm}{20cm}[flowchart]
 \newstaticframe{40cm}{5cm}{32cm}{20cm}[ligosmile]
 
+\newstaticframe{1cm}{66cm}{59cm}{0cm}[rule1]
+\newstaticframe{55cm}{0.5cm}{4cm}{26cm}[rule2]
+\newstaticframe{1cm}{80cm}{87cm}{0cm}[rule3]
+
 % Flow frames
 \newflowframe{27cm}{27cm}{4cm}{40cm}
 \newflowframe{27cm}{27cm}{32cm}{40cm}
@@ -67,6 +71,18 @@
 
 
 \begin{document}
+
+\begin{staticcontents*}{rule1}
+\centering\rule{1pt}{66cm}
+\end{staticcontents*}
+
+\begin{staticcontents*}{rule2}
+\rule{55cm}{1pt}
+\end{staticcontents*}
+
+\begin{staticcontents*}{rule3}
+\centering\rule{1pt}{80cm}
+\end{staticcontents*}
 
 \begin{staticcontents*}{title-drawing}
 \includegraphics[width=0.5\textwidth]{title-drawing.pdf}
@@ -222,7 +238,7 @@ involves a spherical harmonic transform of both the masked sky map $v_i(\omega)s
 We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are \emph{OpenMP} accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved run times as short as 5~s, though further speedup is possible.
 
 \vspace{1cm}
-\makebox[25cm][r]{\raggedleft\includegraphics[width=27cm]{example-no-interference}}
+\makebox[25cm][r]{\raggedleft\includegraphics[width=26cm]{example-no-interference}}
 
 %\framebreak
 \begin{staticcontents*}{spilled-text}
@@ -267,6 +283,6 @@ This project lays the groundwork for future multi-messenger studies that will ac
 http://aa.usno.navy.mil/software/novas
 
 \noindent\\
-LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v2.
+LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v3.
 
 \end{document}
