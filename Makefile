@@ -8,4 +8,4 @@ poster.pdf: poster.tex title-drawing.pdf spatial.pdf multipole.pdf ../efficiency
 	$(XELATEX) poster
 
 clean:
-	rm -f poster.{pdf,aux,log,xdv}
+	rm -f poster.{pdf,aux,log,xdv,bbl,blg}
