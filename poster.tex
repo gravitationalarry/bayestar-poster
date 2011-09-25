@@ -151,7 +151,7 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 
 \dropcap{P}{lanning} optical followup of gravitational wave (GW) events is a challenging optimization problem.  GW sky maps are multimodal and dispersed over 4π.  A telescope’s field of view (FOV) may have gaps between CCDs, dead CCDs, or vignetted or clipped regions.  Any of these complications make it difficult to decide on the “best” place to point a telescope.
 
-We realized that if we phrased the single telescope problem as a cross-correlation of the telescope’s FOV and the GW sky map, we could attack it with HEALPix --- the workhorse of CMB maps --- and spherical harmonic analysis.
+We realized that if we phrased the single telescope problem as a cross-correlation of the telescope’s FOV and the GW sky map, we could attack it with \emph{HEALPix} --- the workhorse of CMB maps --- and spherical harmonic analysis.
 
 Our summer student (A. Speranza) implemented the fast convolution of~\citet{Wandelt:2001p13439} and used it to compute the probability of imaging an EM counterpart.  As we expected, the harmonic analysis algorithm was much faster than the spatial algorithm.
 
@@ -213,7 +213,7 @@ $$
 	4cm 23cm
 	3.25cm 23.75cm
 	0cm 27cm  
-Equation~(\ref{eq:single-telescope-integral}) resembles a cross-correlation integral.  For scalar functions, the convolution theorem and the fast Fourier transform (FFT) make cross-correlation in the frequency domain very efficient.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and others have described analogous fast convolution algorithms for functions defined on the unit sphere.  We used HEALPix to write two convolution algorithms:
+Equation~(\ref{eq:single-telescope-integral}) resembles a cross-correlation integral.  For scalar functions, the convolution theorem and the fast Fourier transform (FFT) make cross-correlation in the frequency domain very efficient.  \citet{Driscoll1994202}, \citet{Wandelt:2001p13439}, and others have described analogous fast convolution algorithms for functions defined on the unit sphere.  We used \emph{HEALPix} to write two convolution algorithms:
 
 \paragraph{spatial}
 uses nearest neighbor interpolation of the rotated kernel to approximate the integral in spherical polar coordinates.
