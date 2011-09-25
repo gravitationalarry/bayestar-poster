@@ -222,7 +222,7 @@ uses nearest neighbor interpolation of the rotated kernel to approximate the int
 involves a spherical harmonic transform of both the sky map $s(\omega)$ and the FOV $b(\omega)$, a weighted inner product of the spherical harmonic coefficients, and a 2D inverse FFT to return to polar coordinates.\\
 
 \noindent
-We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are OpenMP accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved runtimes as short as 5~s, although further speedup is probably possible.
+We checked convergence and run time of both algorithms.  At a resolution of $\approx$~0.05~deg$^\mathsf{2}$, \textbf{spatial} takes $\approx$1000~s while \textbf{multipole} takes $\approx$25~s of CPU time.  Both versions are \emph{OpenMP} accelelerated to exploit multiple cores.  On the LIGO-Caltech cluster head node, the \textbf{multipole} algorithm has achieved runtimes as short as 5~s, although further speedup is probably possible.
 
 \vspace{1cm}
 \makebox[25cm][r]{\raggedleft\includegraphics[width=27cm]{example-no-interference}}
