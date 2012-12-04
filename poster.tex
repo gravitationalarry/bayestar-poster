@@ -56,6 +56,7 @@
 \newstaticframe{16cm}{18cm}{48cm}{66cm}[healpix-dots]
 \newstaticframe{27cm}{80cm}{88cm}{20cm}[flowchart]
 \newstaticframe{40cm}{5cm}{32cm}{20cm}[ligosmile]
+\newstaticframe{20cm}{6cm}{19cm}{80cm}[qr-code]
 
 \newstaticframe{1cm}{66cm}{59cm}{0cm}[rule1]
 \newstaticframe{55cm}{0.5cm}{4cm}{26cm}[rule2]
@@ -71,6 +72,19 @@
 
 
 \begin{document}
+
+\begin{staticcontents*}{qr-code}
+\begin{minipage}[b]{12cm}%
+\raggedleft%
+{\fontspec{Marvel Bold}\Huge Scan me} \\
+\vspace{0.25cm}
+\Large{to read on arXiv} \\
+\Large{arXiv:1204.4510} \\
+\vspace{0.1cm}
+\end{minipage}%
+\hspace{1cm}%
+\includegraphics[width=6cm]{doi}
+\end{staticcontents*}
 
 \begin{staticcontents*}{rule1}
 \centering\rule{1pt}{66cm}
@@ -89,11 +103,11 @@
 \end{staticcontents*}
 
 \begin{staticcontents*}{efficiency_distance}
-\includegraphics[width=\textwidth]{../efficiency_distance}
+\includegraphics[width=\textwidth]{../bayestar-paper/efficiency_distance}
 \end{staticcontents*}
 
 \begin{staticcontents*}{efficiency_histogram}
-\includegraphics[width=\textwidth]{../efficiency_histogram}
+\includegraphics[width=\textwidth]{../bayestar-paper/efficiency_histogram}
 \end{staticcontents*}
 
 \begin{staticcontents*}{convergence}
@@ -278,11 +292,11 @@ We compared the detection efficiency of the noncoordinated planner and our two c
 This project lays the groundwork for future multi-messenger studies that will account for a mix of telescopes with different limiting magnitudes, slew times, in addition to fields of view.
 
 \bibliographystyle{apj}
-\bibliography{../proposal,../telescope,../telescope_list}
+\bibliography{../bayestar-paper/proposal,../bayestar-paper/telescope,../bayestar-paper/telescope_list}
 \noindent
 http://aa.usno.navy.mil/software/novas
 
 \noindent\\
-LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v3.
+LIGO was constructed by the California Institute of Technology and Massachusetts Institute of Technology with funding from the National Science Foundation (NSF) and operates under cooperative agreement PHY-0107417.  This research is supported by NSF through a Graduate Research Fellowship to LS.  This poster has LIGO Document Number LIGO-G1100983-v4.
 
 \end{document}
