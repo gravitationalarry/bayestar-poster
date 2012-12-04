@@ -12,6 +12,7 @@
 \usepackage{flowfram}
 \usepackage{url}
 \usepackage{tikz}
+\usepackage{hyphenat}
 \usetikzlibrary{calc,matrix,shapes.geometric,shapes.misc,shapes.symbols}
 
 % Macros
@@ -160,7 +161,7 @@ figure 6d of~\citet{healpix}\\\vspace{5mm}
 		\node[draw, shape=rectangle, text width=6cm] (4) {Convolve FOV with skymap}; \\
 		\node[draw, shape=rectangle, text width=6cm] (5) {Locate maximum}; & \node[draw, shape=starburst, random starburst=12, starburst point height=1.5cm] (55) {to telescope}; \\
 		\node[draw, shape=rectangle, text width=6cm] (6) {Mask out FOV from skymap}; \\
-		\node[draw, shape=diamond, aspect=2, text width=6cm] (7) {Any telescopes left?}; \\
+		\node[draw, shape=diamond, aspect=2, text width=6cm] (7) {\nohyphens{Any telescopes left?}}; \\
 		\node[draw, shape=rounded rectangle] (8) {Done}; \\
 	};
 	\end{pgfonlayer}
